@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphController : MonoBehaviour
+public class GraphController_v2 : MonoBehaviour
 {
     //Determines whether the graph(s) are shown or not
     bool show = false;

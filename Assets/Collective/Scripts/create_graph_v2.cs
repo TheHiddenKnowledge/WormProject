@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class create_graph : MonoBehaviour
+public class create_graph_v2 : MonoBehaviour
 {
     //Prefabs for graph components.
     public Text GraphText;
@@ -69,8 +69,8 @@ public class create_graph : MonoBehaviour
     void Update()
     {
         //Sets the current generation and current average to the value held by the evolution simulator script.
-        cgeneration = Camera.main.GetComponent<evolution_sim>().generation;
-        float average = Camera.main.GetComponent<evolution_sim>().average;
+        cgeneration = Camera.main.GetComponent<evolution_sim_v2>().generation;
+        float average = Camera.main.GetComponent<evolution_sim_v2>().average;
         //Whenever the generation advances, the current average is added to the averages dataset and the previous generation is set. 
         //All graph components are deleted and then recreated to update the graph.
         if (cgeneration-pgeneration !=0)
@@ -80,12 +80,12 @@ public class create_graph : MonoBehaviour
             {
                 Destroy(obj);
             }
-            if (Camera.main.GetComponent<evolution_sim>().generation%nx==0)
+            if (Camera.main.GetComponent<evolution_sim_v2>().generation%nx==0)
             {
-                mult = Camera.main.GetComponent<evolution_sim>().generation / (int)nx + 1;
+                mult = Camera.main.GetComponent<evolution_sim_v2>().generation / (int)nx + 1;
             }
             MakeGraph(mult);
-            pgeneration = Camera.main.GetComponent<evolution_sim>().generation;
+            pgeneration = Camera.main.GetComponent<evolution_sim_v2>().generation;
         }
     }
 }

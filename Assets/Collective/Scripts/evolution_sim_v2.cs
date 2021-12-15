@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class evolution_sim : MonoBehaviour
+public class evolution_sim_v2 : MonoBehaviour
 {
     //Arrays containing information on objects spawned, the amount spawns, and whether the objects spawn constantly
     public GameObject[] item;
@@ -40,7 +40,7 @@ public class evolution_sim : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
-                var clone = (GameObject)Instantiate(spawned.gameObject, (new Vector3((Random.Range(xmin, xmax)), (Random.Range(ymin, ymax)), 0.0f)), Quaternion.Euler(0.0f, 0.0f, Random.Range(0f, 360f)));
+                var clone = (GameObject)Instantiate(spawned.gameObject, (new Vector3((Random.Range(xmin, xmax)), (Random.Range(ymin, ymax)), 0.0f)), Quaternion.Euler(0.0f, 0.0f, 0.0f));
             }
         }
         else
@@ -63,12 +63,12 @@ public class evolution_sim : MonoBehaviour
         average = 0;
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Brain"))
         {
-            obj.GetComponent<create_worm>().speed = speed.value;
+            obj.GetComponent<create_worm_v2>().speed = speed.value;
             int gene1 = geneslist[Random.Range(0, geneslist.Length)];
             int gene2 = geneslist[Random.Range(0, geneslist.Length)];
             int dominantgene = 0;
-            obj.GetComponent<create_worm>().genes[0] = gene1;
-            obj.GetComponent<create_worm>().genes[1] = gene2;
+            obj.GetComponent<create_worm_v2>().genes[0] = gene1;
+            obj.GetComponent<create_worm_v2>().genes[1] = gene2;
             if (gene1 > gene2 || gene1 == gene2)
             {
                 dominantgene = gene1;
@@ -98,7 +98,7 @@ public class evolution_sim : MonoBehaviour
             {
                 max = 1.25f;
             }
-            obj.GetComponent<create_worm>().max = max;
+            obj.GetComponent<create_worm_v2>().max = max;
             average += max;
             
         }
@@ -112,10 +112,10 @@ public class evolution_sim : MonoBehaviour
             int[] worm1 = wormgenes[Random.Range(0, wormgenes.Count)];
             int[] worm2 = wormgenes[Random.Range(0, wormgenes.Count)];
             int[] newgene = { worm1[Random.Range(0, 2)], worm2[Random.Range(0, 2)] };
-            obj.GetComponent<create_worm>().speed = speed.value;
+            obj.GetComponent<create_worm_v2>().speed = speed.value;
             int dominantgene = 0;
-            obj.GetComponent<create_worm>().genes[0] = newgene[0];
-            obj.GetComponent<create_worm>().genes[1] = newgene[1];
+            obj.GetComponent<create_worm_v2>().genes[0] = newgene[0];
+            obj.GetComponent<create_worm_v2>().genes[1] = newgene[1];
             if (newgene[0] > newgene[1] || newgene[0] == newgene[1])
             {
                 dominantgene = newgene[0];
@@ -145,9 +145,8 @@ public class evolution_sim : MonoBehaviour
             {
                 max = 1.25f;
             }
-            obj.GetComponent<create_worm>().max = max;
+            obj.GetComponent<create_worm_v2>().max = max;
             average += max;
-
         }
         average /= number[1];
     }
@@ -180,7 +179,7 @@ public class evolution_sim : MonoBehaviour
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Brain"))
             {
-                obj.GetComponent<create_worm>().speed = speed.value;
+                obj.GetComponent<create_worm_v2>().speed = speed.value;
             }
             initialspeed = speed.value;
         }
@@ -205,12 +204,8 @@ public class evolution_sim : MonoBehaviour
             }
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Brain"))
             {
-                finalgenes.Add(obj.GetComponent<create_worm>().genes);
-                for (int i = obj.GetComponent<create_worm>().segments.Length-1; i >= 0; i--)
-                {
-                    DestroyImmediate(obj.GetComponent<create_worm>().segments[i]);
-                    
-                }
+                finalgenes.Add(obj.GetComponent<create_worm_v2>().genes);
+                DestroyImmediate(obj);
             }
             generation += 1;
             gcount.text = "Generation: "+generation.ToString();

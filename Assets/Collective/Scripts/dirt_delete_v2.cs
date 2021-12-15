@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dirt_delete : MonoBehaviour
+public class dirt_delete_v2 : MonoBehaviour
 {
     private void OnTriggerStay2D(Collider2D col)
     {
-        if (col.tag == "Head1")
+        if (col.tag == "Body")
         {
-            col.transform.parent.GetChild(1).GetComponent<create_worm>().hunger += 7.5f;
+            col.transform.parent.GetComponent<create_worm_v2>().hunger += 7.5f;
             Destroy(gameObject);
         }
     }
