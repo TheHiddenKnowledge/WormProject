@@ -174,17 +174,6 @@ public class create_worm_v2 : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    void DelayedStart()
-    {
-        for (int i = 0; i < clones.Length; i++)
-        {
-            if (i != 0)
-            {
-                clones[i].tag = "Untagged";
-                clones[i].GetComponent<Collider2D>().isTrigger = false;
-            }
-        }
-    }
     public void Start()
     {
         hunger = maxhunger;
@@ -241,7 +230,6 @@ public class create_worm_v2 : MonoBehaviour
                 width_active[i] = base_width;
             }
         }
-        Invoke("DelayedStart", 1f);
         make_Mesh();
         }
     public void Update()
